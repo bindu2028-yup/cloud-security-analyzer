@@ -1,0 +1,17 @@
+
+timestamp,user,source_ip,action,resource,status,location,admin
+2026-10-14 09:00:00,arun,192.168.1.10,ConsoleLogin,Dashboard,Success,India,false
+2026-10-14 09:05:00,priya,192.168.1.11,GetObject,S3Bucket,Success,India,false
+2026-10-14 09:10:00,arun,192.168.1.10,DescribeInstances,EC2,Success,India,false
+2026-10-14 09:15:00,admin1,192.168.1.12,CreateAccessKey,IAM,Success,India,true
+2026-10-14 09:20:00,priya,192.168.1.11,ListBuckets,S3,Success,India,false
+2026-10-14 09:25:00,arun,203.0.113.50,DeleteTrail,CloudTrail,Success,Unknown,true
+2026-10-14 09:30:00,admin1,192.168.1.12,AttachAdminPolicy,IAM,Success,India,true
+2026-10-14 09:35:00,testuser,198.51.100.20,ConsoleLogin,Dashboard,Failed,Unknown,false
+2026-10-14 09:40:00,testuser,198.51.100.20,ConsoleLogin,Dashboard,Failed,Unknown,false
+2026-10-14 09:45:00,arun,192.168.1.10,GetObject,S3Bucket,Success,India,false
+2026-10-14 09:50:00,unknown,203.0.113.99,CreateUser,IAM,Success,Unknown,true
+2026-10-14 09:55:00,priya,192.168.1.11,PutBucketPolicy,S3,Success,India,false
+2026-10-14 10:00:00,admin1,192.168.1.12,DeleteUser,IAM,Success,India,true
+2026-10-14 10:05:00,arun,192.168.1.10,ListBuckets,S3,Success,India,false
+2026-10-14 10:10:00,unknown,203.0.113.99,AttachAdminPolicy,IAM,Success,Unknown,true
