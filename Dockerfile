@@ -21,6 +21,7 @@ COPY --from=builder /install/packages /usr/local
 
 COPY app.py .
 COPY security_logs.csv .
+COPY risk_analysis.py .
 
 EXPOSE 8501
 

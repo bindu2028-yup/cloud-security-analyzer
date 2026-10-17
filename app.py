@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 from sklearn.ensemble import IsolationForest
 from sklearn.preprocessing import OneHotEncoder
+from risk_analysis import analyze_risks
 
 st.set_page_config(page_title="Cloud Security Analyzer", page_icon="🛡️", layout="wide")
 
@@ -20,19 +21,27 @@ col1.metric("Total Events", len(df))
 col2.metric("Unique Users", df["user"].nunique())
 col3.metric("Failed Events", (df["status"] == "Failed").sum())
 
-# Rule-based detection
-risky_actions = [
-    "DeleteTrail",
-    "AttachAdminPolicy",
-    "CreateUser",
-    "CreateAccessKey",
-    "DeleteUser",
-]
-
-df["Risk Flag"] = df["action"].isin(risky_actions)
+# Explainable risk detection
+df = analyze_risks(df)
 
 st.subheader("Potentially Risky Events")
-st.dataframe(df[df["Risk Flag"]], use_container_width=True)
+
+display_columns = [
+    "timestamp",
+    "user",
+    "source_ip",
+    "action",
+    "resource",
+    "status",
+    "location",
+    "Risk Flag",
+    "Risk Reason",
+]
+
+st.dataframe(
+    df.loc[df["Risk Flag"], display_columns],
+    use_container_width=True,
+)
 
 # Machine-learning anomaly detection
 st.subheader("Machine Learning: Unusual Activity")
