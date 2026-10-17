@@ -1,3 +1,4 @@
+
 name: Cloud Security Analyzer CI
 
 on:
@@ -6,9 +7,16 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   test-and-build:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
 
     steps:
       - name: Checkout repository
@@ -30,14 +38,27 @@ jobs:
       - name: Check formatting with Black
         run: black --check app.py
 
-     
       - name: Check code with Flake8
         run: python -m flake8 --config=.flake8 app.py
 
-      
       - name: Run tests
         run: python -m pytest -v tests/
 
-
       - name: Build Docker image
         run: docker build -t cloud-security-analyzer:ci .
+
+      - name: Log in to GitHub Container Registry
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image to GHCR
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/cloud-security-analyzer:latest
