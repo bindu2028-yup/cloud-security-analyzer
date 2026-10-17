@@ -1,6 +1,10 @@
-pandas==2.2.1
-numpy==1.26.4
-streamlit==1.32.2
-plotly==5.20.0
-scikit-learn==1.4.2
-pyarrow==15.0.2
+
+pandas==3.0.6
+numpy==2.4.0
+streamlit
+plotly==7.1.0
+scikit-learn==1.9.1
+pyarrow==26.0.0
+pillow
+protobuf==7.36.2
+wheel==0.46.2
