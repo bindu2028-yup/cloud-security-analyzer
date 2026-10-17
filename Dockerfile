@@ -5,7 +5,9 @@ WORKDIR /install
 
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir --prefix=/install/packages -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip wheel "jaraco.context>=6.1.0" \
+    && pip install --no-cache-dir --prefix=/install/packages -r requirements.txt \
+    && pip install --no-cache-dir --prefix=/install/packages --upgrade wheel "jaraco.context>=6.1.0"
 
 
 # Stage 2: Create the final application image
